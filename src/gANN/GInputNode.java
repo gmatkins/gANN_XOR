@@ -7,7 +7,7 @@ public class GInputNode implements IGInputSource{
 
 	}
 	
-	public void setValue(float value){this.value = value;}
+	public void setValue(float value){this.value = value + 0.01f;}
 	
 	@Override
 	public float getOutput() {

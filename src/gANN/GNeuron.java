@@ -35,9 +35,9 @@ public class GNeuron implements IGInputSource{
 	}
 	
 	public void backProp(float target, float generated){
-		if (target == generated) return;
+		//if (target == generated) return;
 		for (inputSource input: inputs){
-			//System.out.println(input.value);
+			//System.out.println(input.weight);
 			float error = (target - generated);
 			input.weight += 0.1 * error * input.value;
 			input.source.backProp(target, input.value);
