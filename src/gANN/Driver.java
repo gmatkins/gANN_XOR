@@ -26,14 +26,21 @@ public class Driver {
 		
 		for (int i = 0; i < maxLoops; i++){
 			input1.setValue(inputVals[i%4][0]);
-			input1.setValue(inputVals[i%4][1]);
+			input2.setValue(inputVals[i%4][1]);
 			currentOutput = output.getOutput();
-			System.out.print(inputVals[i%4][0]);
+			System.out.print(input1.getOutput());
 			System.out.print(" XOR ");
-			System.out.print(inputVals[i%4][1]);
+			System.out.print(input2.getOutput());
 			System.out.print(" = ");
-			System.out.println(currentOutput);
+			System.out.print(currentOutput);
+			System.out.print(" expected ");
+			System.out.println(inputVals[i%4][2]);
 			output.backProp(inputVals[i%4][2], currentOutput);
+			if(i%4 == 3){
+				System.out.println("------------------------");
+				//try{System.in.read();}catch(Exception e){}
+			}
+			
 		}
 
 	}

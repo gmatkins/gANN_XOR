@@ -1,6 +1,8 @@
 package gANN;
 
 import java.util.Vector;
+import java.util.Random;
+import java.lang.Math;
 
 public class GNeuron implements IGInputSource{
 	private class inputSource{
@@ -14,10 +16,10 @@ public class GNeuron implements IGInputSource{
 			value = 0.0f;
 		}
 	};
-	private Vector<inputSource> inputs;
+	private Vector<inputSource> inputs = new Vector<inputSource>();
 	
 	public GNeuron(){
-		
+
 	}
 
 	@Override
@@ -29,18 +31,20 @@ public class GNeuron implements IGInputSource{
 			weightedInput += input.value * input.weight;
 		}
 		
-		return weightedInput<0.5f?0.0f:1.0f;
+		return (float)(weightedInput/Math.sqrt(1 + (weightedInput * weightedInput)));
 	}
 	
 	public void backProp(float target, float generated){
 		if (target == generated) return;
 		for (inputSource input: inputs){
-			input.weight += (input.value - target)/input.weight * 0.1;
-			if(input.weight == 0.0f) input.weight = 0.000000001f;
+			//System.out.println(input.value);
+			float error = (target - generated);
+			input.weight += 0.1 * error * input.value;
+			input.source.backProp(target, input.value);
 		}
 	}
 	
 	public void addInput(IGInputSource newInput){
-		inputs.add(new inputSource(newInput, 0.5f));
+		inputs.add(new inputSource(newInput, new Random().nextFloat()));
 	}
 }

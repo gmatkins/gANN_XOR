@@ -13,5 +13,9 @@ public class GInputNode implements IGInputSource{
 	public float getOutput() {
 		return value;
 	}
+	
+	public void backProp(float target, float generated){
+		return;
+	}
 
 }
